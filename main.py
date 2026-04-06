@@ -1,8 +1,8 @@
 import telebot
+import os
+import time
 
-# ЗАМЕНИТЕ НА ВАШ ТОКЕН
 TOKEN = "8411810943:AAHKjdJ9IVCpJ6tibDd6fwweQZFnq8Nw1kk"
-
 CHANNEL_LINK = "https://t.me/+RCqrXBwVCi1kNTg0"
 CHAT_LINK = "https://t.me/+YybtW77iiD84ZmYy"
 
@@ -19,5 +19,11 @@ def start(message):
     
     bot.send_message(message.chat.id, text)
 
-print("Бот запущен...")
-bot.infinity_polling()
+if __name__ == "__main__":
+    print("Бот запущен...")
+    while True:
+        try:
+            bot.infinity_polling(timeout=60)
+        except Exception as e:
+            print(f"Ошибка: {e}")
+            time.sleep(15)
