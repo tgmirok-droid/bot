@@ -1,22 +1,28 @@
 import telebot
-import os
+from telebot import types
 
-TOKEN = "8411810943:AAHKjdJ9IVCpJ6tibDd6fwweQZFnq8Nw1kk"
-CHANNEL_LINK = "https://t.me/+RCqrXBwVCi1kNTg0"
-CHAT_LINK = "https://t.me/+YybtW77iiD84ZmYy"
+TOKEN = "8341879502:AAEO5qaIQ894Q5cziGoRA963b-yOOqlETCk"
+CHANNEL_1_LINK = "https://t.me/famIist"
+CHANNEL_2_LINK = "https://t.me/+wUJ5LhK53Us0ZmM6"
 
 bot = telebot.TeleBot(TOKEN)
 
 @bot.message_handler(commands=['start'])
 def start(message):
-    text = f"""⚠️ Чтобы воспользоваться сн@сером, подпишись на:
-
-📢 Канал: {CHANNEL_LINK}
-💬 Чат: {CHAT_LINK}
-
-✅ После подписки нажми /start снова"""
+    # Создаём клавиатуру
+    markup = types.InlineKeyboardMarkup()
     
-    bot.send_message(message.chat.id, text)
+    # Кнопка 1
+    btn1 = types.InlineKeyboardButton("📢 Канал", url=CHANNEL_1_LINK)
+    # Кнопка 2
+    btn2 = types.InlineKeyboardButton("📢 Канал", url=CHANNEL_2_LINK)
+    
+    markup.add(btn1, btn2)
+    
+    text = ("Вас приветствует наш совместный проект sn5ser bot!\n\n"
+            "Чтобы получить доступ к боту, подпишитесь на спонсоров:")
+    
+    bot.send_message(message.chat.id, text, reply_markup=markup)
 
 print("Бот запущен и работает!")
 bot.infinity_polling()
